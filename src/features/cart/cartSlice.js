@@ -1,3 +1,5 @@
+import initialData from "../../data";
+
 const initialState = {
   isLoading: false,
   cart: initialData,
@@ -61,4 +63,26 @@ export default cartReducer = (state = initialState, action) => {
   }
 
   return state;
+};
+
+// ACTION CREATORS
+
+export const clearCart = () => {
+  return { type: "CLEAR_CART" };
+};
+
+export const removeItem = (id) => {
+  return { type: "REMOVE_ITEM", id: id };
+};
+
+export const addQty = (id) => {
+  return { type: "ADD_QTY", id: id };
+};
+
+export const minusQty = (id) => {
+  return { type: "MINUS_QTY", id: id };
+};
+
+export const getTotalQty = () => {
+  return { type: "GET_TOTAL_QUANTITY" };
 };
