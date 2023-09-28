@@ -67,9 +67,9 @@ export default function cartReducer(state = initialState, action) {
 
 // ACTION CREATORS
 
-export const clearCart = () => {
+export function clearCart() {
   return { type: "CLEAR_CART" };
-};
+}
 
 export const removeItem = (id) => {
   return { type: "REMOVE_ITEM", id: id };
