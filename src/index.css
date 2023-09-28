@@ -29,8 +29,8 @@ nav {
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  background-color: #4895ef;
-  padding: 10px 40px;
+  background-color: #f1ba0a;
+  padding: 0px 40px;
 }
 
 nav h1 {
@@ -112,7 +112,7 @@ nav h1 {
   background-color: #fff;
   padding: 0;
   border: none;
-  color: #4895ef;
+  color: #f1ba0a;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
