@@ -7,7 +7,7 @@ const initialState = {
   quantity: 0,
 };
 
-export default cartReducer = (state = initialState, action) => {
+export default function cartReducer(state = initialState, action) {
   if (action.type === "CLEAR_CART") {
     return { ...state, cart: [] };
   }
@@ -63,7 +63,7 @@ export default cartReducer = (state = initialState, action) => {
   }
 
   return state;
-};
+}
 
 // ACTION CREATORS
 
