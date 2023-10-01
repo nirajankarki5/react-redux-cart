@@ -8,18 +8,18 @@ const initialState = {
 };
 
 export default function cartReducer(state = initialState, action) {
-  if (action.type === "cart/clear_cart") {
+  if (action.type === "cart/clearCart") {
     return { ...state, cart: [] };
   }
 
-  if (action.type === "cart/remove_item") {
+  if (action.type === "cart/removeItem") {
     return {
       ...state,
       cart: state.cart.filter((item) => item.id !== action.id),
     };
   }
 
-  if (action.type === "cart/add_qty") {
+  if (action.type === "cart/addQty") {
     const newCart = state.cart
       .map((item) => {
         if (item.id === action.id) {
@@ -32,7 +32,7 @@ export default function cartReducer(state = initialState, action) {
     return { ...state, cart: newCart };
   }
 
-  if (action.type === "cart/minus_qty") {
+  if (action.type === "cart/minusQty") {
     const newCart = state.cart
       .map((item) => {
         if (item.id === action.id) {
@@ -45,7 +45,7 @@ export default function cartReducer(state = initialState, action) {
     return { ...state, cart: newCart };
   }
 
-  if (action.type === "cart/get_total_quantity") {
+  if (action.type === "cart/getTotalQty") {
     const { quantity, total } = state.cart.reduce(
       (finalValue, cartItem) => {
         const newQuantity = finalValue.quantity + cartItem.quantity;
@@ -68,21 +68,21 @@ export default function cartReducer(state = initialState, action) {
 // ACTION CREATORS
 
 export function clearCart() {
-  return { type: "cart/clear_cart" };
+  return { type: "cart/clearCart" };
 }
 
 export const removeItem = (id) => {
-  return { type: "cart/remove_item", id: id };
+  return { type: "cart/removeItem", id: id };
 };
 
 export const addQty = (id) => {
-  return { type: "cart/add_qty", id: id };
+  return { type: "cart/addQty", id: id };
 };
 
 export const minusQty = (id) => {
-  return { type: "cart/minus_qty", id: id };
+  return { type: "cart/minusQty", id: id };
 };
 
 export const getTotalQty = () => {
-  return { type: "cart/get_total_quantity" };
+  return { type: "cart/getTotalQty" };
 };

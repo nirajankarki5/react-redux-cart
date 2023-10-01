@@ -1,8 +1,17 @@
+import { useEffect } from "react";
 import { AiFillShopping } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getTotalQty } from "../features/cart/cartSlice";
 
 const Navbar = () => {
-  const { quantity } = useSelector((store) => store.cart);
+  const { quantity, cart } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
+
+  // get no of cart items when clear cart is performed
+  useEffect(() => {
+    dispatch(getTotalQty());
+  }, [cart, dispatch]);
 
   return (
     <nav>
