@@ -1,3 +1,4 @@
+import { createSlice } from "@reduxjs/toolkit";
 import initialData from "../../data";
 
 const initialState = {
@@ -7,82 +8,62 @@ const initialState = {
   quantity: 0,
 };
 
-export default function cartReducer(state = initialState, action) {
-  if (action.type === "cart/clear_cart") {
-    return { ...state, cart: [] };
-  }
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    clearCart(state, action) {
+      state.cart = [];
+    },
 
-  if (action.type === "cart/remove_item") {
-    return {
-      ...state,
-      cart: state.cart.filter((item) => item.id !== action.id),
-    };
-  }
+    removeItem(state, action) {
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
+    },
 
-  if (action.type === "cart/add_qty") {
-    const newCart = state.cart
-      .map((item) => {
-        if (item.id === action.id) {
+    addQty(state, action) {
+      state.cart = state.cart.map((item) => {
+        if (item.id === action.payload) {
           return { ...item, quantity: item.quantity + 1 };
         }
         return item;
-      })
-      .filter((item) => item.quantity !== 0);
+      });
+    },
 
-    return { ...state, cart: newCart };
-  }
+    minusQty(state, action) {
+      state.cart = state.cart
+        .map((item) => {
+          if (item.id === action.payload) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity !== 0);
+    },
 
-  if (action.type === "cart/minus_qty") {
-    const newCart = state.cart
-      .map((item) => {
-        if (item.id === action.id) {
-          return { ...item, quantity: item.quantity - 1 };
+    getTotalQty(state, action) {
+      const { total, quantity } = state.cart.reduce(
+        (finalValue, cartItem) => {
+          const newQuantity = finalValue.quantity + cartItem.quantity;
+          const newTotal =
+            finalValue.total + cartItem.quantity * cartItem.price;
+
+          return { total: newTotal, quantity: newQuantity };
+        },
+        {
+          total: 0,
+          quantity: 0,
         }
-        return item;
-      })
-      .filter((item) => item.quantity !== 0);
+      );
 
-    return { ...state, cart: newCart };
-  }
+      state.quantity = quantity;
+      state.total = total;
+    },
+  },
+});
 
-  if (action.type === "cart/get_total_quantity") {
-    const { quantity, total } = state.cart.reduce(
-      (finalValue, cartItem) => {
-        const newQuantity = finalValue.quantity + cartItem.quantity;
-        const newTotal = finalValue.total + cartItem.quantity * cartItem.price;
+console.log(cartSlice);
 
-        return { quantity: newQuantity, total: newTotal };
-      },
-      {
-        quantity: 0,
-        total: 0,
-      }
-    );
+export const { clearCart, removeItem, addQty, minusQty, getTotalQty } =
+  cartSlice.actions;
 
-    return { ...state, quantity, total };
-  }
-
-  return state;
-}
-
-// ACTION CREATORS
-
-export function clearCart() {
-  return { type: "cart/clear_cart" };
-}
-
-export const removeItem = (id) => {
-  return { type: "cart/remove_item", id: id };
-};
-
-export const addQty = (id) => {
-  return { type: "cart/add_qty", id: id };
-};
-
-export const minusQty = (id) => {
-  return { type: "cart/minus_qty", id: id };
-};
-
-export const getTotalQty = () => {
-  return { type: "cart/get_total_quantity" };
-};
+export default cartSlice.reducer;
