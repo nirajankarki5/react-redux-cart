@@ -1,10 +1,8 @@
 # React-Redux-Cart
 
-### two branches
-
-### main: redux
-
-### redux-toolkit
+- Branches
+- main: redux
+- redux-toolkit
 
 ## Packages:
 
