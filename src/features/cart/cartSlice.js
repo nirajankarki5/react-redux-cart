@@ -8,18 +8,18 @@ const initialState = {
 };
 
 export default function cartReducer(state = initialState, action) {
-  if (action.type === "CLEAR_CART") {
+  if (action.type === "cart/clear_cart") {
     return { ...state, cart: [] };
   }
 
-  if (action.type === "REMOVE_ITEM") {
+  if (action.type === "cart/remove_item") {
     return {
       ...state,
       cart: state.cart.filter((item) => item.id !== action.id),
     };
   }
 
-  if (action.type === "ADD_QTY") {
+  if (action.type === "cart/add_qty") {
     const newCart = state.cart
       .map((item) => {
         if (item.id === action.id) {
@@ -32,7 +32,7 @@ export default function cartReducer(state = initialState, action) {
     return { ...state, cart: newCart };
   }
 
-  if (action.type === "MINUS_QTY") {
+  if (action.type === "cart/minus_qty") {
     const newCart = state.cart
       .map((item) => {
         if (item.id === action.id) {
@@ -45,7 +45,7 @@ export default function cartReducer(state = initialState, action) {
     return { ...state, cart: newCart };
   }
 
-  if (action.type === "GET_TOTAL_QUANTITY") {
+  if (action.type === "cart/get_total_quantity") {
     const { quantity, total } = state.cart.reduce(
       (finalValue, cartItem) => {
         const newQuantity = finalValue.quantity + cartItem.quantity;
@@ -68,21 +68,21 @@ export default function cartReducer(state = initialState, action) {
 // ACTION CREATORS
 
 export function clearCart() {
-  return { type: "CLEAR_CART" };
+  return { type: "cart/clear_cart" };
 }
 
 export const removeItem = (id) => {
-  return { type: "REMOVE_ITEM", id: id };
+  return { type: "cart/remove_item", id: id };
 };
 
 export const addQty = (id) => {
-  return { type: "ADD_QTY", id: id };
+  return { type: "cart/add_qty", id: id };
 };
 
 export const minusQty = (id) => {
-  return { type: "MINUS_QTY", id: id };
+  return { type: "cart/minus_qty", id: id };
 };
 
 export const getTotalQty = () => {
-  return { type: "GET_TOTAL_QUANTITY" };
+  return { type: "cart/get_total_quantity" };
 };
