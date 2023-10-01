@@ -1,8 +1,18 @@
 # React-Redux-Cart
 
-- two branches
-- redux
-- redux-toolkit
+### two branches
+
+### main: redux
+
+### redux-toolkit
+
+## Packages:
+
+- npm i redux
+- npm i react-redux
+- npm i @reduxjs/toolkit
+
+## Screenshot
 
 ![ss](ss.png)
 
