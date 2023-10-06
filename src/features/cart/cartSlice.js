@@ -27,6 +27,10 @@ const cartSlice = createSlice({
         }
         return item;
       });
+
+      // OR
+      // const cartItem = state.cart.find((item) => item.id === action.payload);
+      // cartItem.amount = cartItem.amount + 1;
     },
 
     minusQty(state, action) {
