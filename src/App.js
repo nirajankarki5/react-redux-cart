@@ -7,6 +7,7 @@ import Modal from "./components/Modal";
 
 function App() {
   const { cart } = useSelector((store) => store.cart);
+  const { isOpen } = useSelector((store) => store.modal);
   const dispatch = useDispatch();
 
   // display no of cart items and total price when cart is changed
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Modal />
+      {isOpen && <Modal />}
       <div className="App">
         <Navbar />
         <CartContainer />
