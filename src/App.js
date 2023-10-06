@@ -8,7 +8,7 @@ function App() {
   const { cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
-  // display no of cart items and total price when clearCart is performed
+  // display no of cart items and total price when cart is changed
   useEffect(() => {
     dispatch(getTotalQty());
   }, [cart, dispatch]);
