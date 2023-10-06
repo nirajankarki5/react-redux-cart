@@ -11,12 +11,6 @@ import {
 
 const CartItem = ({ id, title, price, quantity, img }) => {
   const dispatch = useDispatch();
-  const { cart } = useSelector((store) => store.cart);
-
-  // run after each cart changes
-  useEffect(() => {
-    dispatch(getTotalQty());
-  }, [cart, dispatch]);
 
   return (
     <div className="cart-item">
