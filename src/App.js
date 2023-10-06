@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getTotalQty } from "./features/cart/cartSlice";
 import CartContainer from "./components/CartContainer";
 import Navbar from "./components/Navbar";
+import Modal from "./components/Modal";
 
 function App() {
   const { cart } = useSelector((store) => store.cart);
@@ -14,10 +15,13 @@ function App() {
   }, [cart, dispatch]);
 
   return (
-    <div className="App">
-      <Navbar />
-      <CartContainer />
-    </div>
+    <>
+      <Modal />
+      <div className="App">
+        <Navbar />
+        <CartContainer />
+      </div>
+    </>
   );
 }
 
